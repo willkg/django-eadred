@@ -45,7 +45,7 @@ class Command(BaseCommand):
 
             module = import_module('%s.sampledata' % app)
             if hasattr(module, 'generate_sampledata'):
-                self.stdout.write('Generating sample data from %s...' % app)
+                self.stdout.write('Generating sample data from %s...\n' % app)
                 module.generate_sampledata(options)
 
         self.stdout.write('Done!\n')
