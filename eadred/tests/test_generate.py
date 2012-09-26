@@ -1,5 +1,3 @@
-import unittest
-
 from eadred.management.commands import generatedata
 
 
@@ -9,5 +7,5 @@ def test_generatedata():
 
     assert sampledata.called == False
     cmd = generatedata.Command()
-    cmd.execute()
+    cmd.run_from_argv(['manage.py', ''])
     assert sampledata.called == True
