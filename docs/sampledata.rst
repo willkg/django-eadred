@@ -90,6 +90,24 @@ named ``sampledata`` and executing the ``generate_sampledata`` method
 in each.
 
 
+Generating data in specified apps
+---------------------------------
+
+Say you had a bunch of apps in your Django project that have
+sampledata modules, but you only want to generated data in one of
+them. You can specify the apps you want to generate data in on the
+command line::
+
+    # All apps
+    $ ./manage.py generatedata
+
+    # Only app1
+    $ ./manage.py generatedata app1
+
+    # Only app1 and app2
+    $ ./manage.py generatedata app1 app2
+
+
 Passing arguments
 -----------------
 
