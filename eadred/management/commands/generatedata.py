@@ -17,12 +17,13 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        for item in options.get('param', []):
-            if '=' in item:
-                key, val = item.split('=')
-            else:
-                key, val = item, True
-            options[key] = val
+        if options.get('param'):
+            for item in options['param']:
+                if '=' in item:
+                    key, val = item.split('=')
+                else:
+                    key, val = item, True
+                options[key] = val
 
         # Allows you to specify which apps to generate sampledata for.
         if not args:
