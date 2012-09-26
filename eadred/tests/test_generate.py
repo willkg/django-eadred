@@ -9,5 +9,5 @@ def test_generatedata():
 
     assert sampledata.called == False
     cmd = generatedata.Command()
-    cmd.handle()
+    cmd.execute()
     assert sampledata.called == True

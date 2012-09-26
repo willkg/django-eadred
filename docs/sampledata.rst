@@ -2,25 +2,16 @@
  Generating sample data
 ========================
 
-Running the cli
-===============
-
-To generate sample data, do this::
-
-    $ ./manage.py generatedata
-
-That will go through all your ``INSTALLED_APPS`` looking for modules
-named ``sampledata`` and executing the ``generate_data`` method in
-each.
-
-That's pretty much the gist of it.
+.. contents::
+   :local:
 
 
-Creating a sampledata module
-============================
+Creating a generate_sampledata function
+=======================================
 
-Before you can generate data, you need to write a ``generate_data``
-function.
+Before you can generate data, you need to write a
+``generate_sampledata`` function for every Django app that you want to
+generate sampledata.
 
 For example, say you had a Django project named `testproject` with a
 directory structure like this::
@@ -42,49 +33,134 @@ project.
 In the ``testapp/`` directory, create a file named ``sampledata.py``.
 
 In the ``sampledata.py`` file, create a function named
-``generate_data``.
+``generate_sampledata``.
 
 Here's an example::
 
-    def generate_data():
+    def generate_sampledata(options):
         pass
 
 In that function, you do whatever you want to do to generate data.
 
 
-Example 1: Load a fixture
-=========================
+Options
+=======
 
-This ``generate_data`` function loads a fixture (ab)using the Django
+The `options` argument holds the options that the OptionParser that
+Django uses to parse the command line arguments. Thus it has the
+standard options that are passed to every Django command:
+
+* `settings`
+* `pythonpath`
+* `verbosity`
+* `traceback`
+
+Most of those probably aren't useful, but `verbosity` might be.
+
+Additionally, you can use the `with` keyword argument to pass
+additional parameters which will get pulled out and added to the
+`options` dict.
+
+For example::
+
+    def generate_sampledata(options):
+        print options.get('foo')
+
+If you do this::
+
+    $ ./manage.py generatedata --with=foo=bar
+
+it'll print::
+
+    bar
+
+
+Running ./manage.py generatedata
+================================
+
+General use
+-----------
+
+To generate sample data, do this::
+
+    $ ./manage.py generatedata
+
+That will go through all your ``INSTALLED_APPS`` looking for modules
+named ``sampledata`` and executing the ``generate_sampledata`` method
+in each.
+
+
+Passing arguments
+-----------------
+
+You can also pass arguments to the ``generate_sampledata`` functions
+using the `with` keyword argument.
+
+Examples::
+
+    # Passes {'fixtures': True} to options
+    $ ./manage.py generatedata --with=fixtures
+
+    # Passes {'type': 'random'} to options
+    $ ./manage.py generatedata --with=type=random
+
+    # Passes {'type': 'random', 'seed': '1024'} to options.
+    $ ./manage.py generatedata --with=type=random --with=seed=1024
+
+You can have as many as you like---each will get parsed out as a
+separate key or key/val parameter.
+
+
+Recipes
+=======
+
+Example 1: Load a fixture
+-------------------------
+
+This ``generate_sampledata`` function loads a fixture (ab)using the Django
 loaddata command::
 
     from django.core.management.commands import loaddata
 
-    def generate_data():
+    def generate_sampledata(options):
         cmd = loaddata.Command()
-        cmd.loaddata('mydata.json')
+        cmd.execute('mydata.json')
+
+
+Run it like this::
+
+    $ ./manage.py generatedata
 
 
 Example 2: Generate data with model makers
-==========================================
+------------------------------------------
 
-This example has a rough model maker for the Record model and creates
-10 Records using it::
+This example has a rough model maker for the Record model. Also, it
+allows the user to specify how many records he/she wants to create
+using the `count` parameter::
 
     import datetime
-
     from someproject.someapp.models import Record
-
 
     def record(**kwargs):
         rec = Record(**kwargs)
         rec.save()
         return rec
 
-    def generate_sampledata():
+    def generate_sampledata(options):
+        count = options.get('count', '10')
+        count = int(count)
+
         now = datetime.datetime.now()
 
-        # Creates 10 records, each on a new day.
-        for i in range(10):
+        # Creates count number of records, each on a new day.
+        for i in range(count):
             record(created=now - datetime.timedelta(days=i),
                    message='Lorem ipsum %d' % i)
+
+
+Run it like this::
+
+    $ ./manage.py generatedata
+    $ ./manage.py generatedata --with=count=20
+

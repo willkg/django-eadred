@@ -4,11 +4,27 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.utils.importlib import import_module
 
+from optparse import make_option
+
 
 class Command(BaseCommand):
     help = 'Generates sample data.'
+    option_list = BaseCommand.option_list + (
+        make_option('--with',
+                    action='append',
+                    dest='param',
+                    help='Pass key=val style param to generate_sampledata'),
+        )
 
     def handle(self, *args, **options):
+        for item in options.get('param', []):
+            if '=' in item:
+                key, val = item.split('=')
+            else:
+                key, val = item, True
+            options[key] = val
+
+        # Allows you to specify which apps to generate sampledata for.
         if not args:
             args = []
 
@@ -28,7 +44,7 @@ class Command(BaseCommand):
 
             module = import_module('%s.sampledata' % app)
             if hasattr(module, 'generate_sampledata'):
-                print 'Generating sample data from %s...' % app
+                self.stdout.write('Generating sample data from %s...' % app)
                 module.generate_sampledata(options)
 
-        print 'Done!'
+        self.stdout.write('Done!\n')
