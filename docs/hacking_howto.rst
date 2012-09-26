@@ -29,31 +29,102 @@ This sets up all the required dependencies for development of eadred.
 Coding conventions
 ==================
 
-We follow the code conventions listed in the `coding conventions page
-of the webdev bootcamp guide
-<http://mozweb.readthedocs.org/en/latest/coding.html>`_. This covers
-all the Python code.
+* PEP-8: http://www.python.org/dev/peps/pep-0008/
+* PEP-257: http://www.python.org/dev/peps/pep-0257/
+* Use pyflakes. Srsly.
 
-We use git and follow the conventions listed in the `git and github
-conventions page of the webdev bootcamp guide
-<http://mozweb.readthedocs.org/en/latest/git.html#working-on-projects>`_.
+pep8 covers Python code conventions. pep257 covers Python docstring
+conventions.
 
+Minor caveats:
 
-Documentation conventions
-=========================
-
-See the `docmentation page in the webdev bootcamp guide
-<http://mozweb.readthedocs.org/en/latest/documentation.html>`_ for
-documentation conventions.
-
-The documentation is available in HTML and PDF forms at
-`<http://elasticutils.readthedocs.org/>`_. This tracks documentation
-in the master branch of the git repository. Because of this, it is
-always up to date.
+* We use Sphinx, so do function definitions like they do:
+  `<http://packages.python.org/an_example_pypi_project/sphinx.html#function-definitions>`_.
+* Don't kill yourself over 80-character lines, but it is important.
+* If you're flummoxed by the conventions, just send me the patch and
+  as long as it functionally works, I can do a cleanup pass in a
+  later commit.
 
 
-Building the docs
-=================
+Git conventions
+===============
+
+I encourage good commit messages in a form that works well with git's
+various commands. Something like
+`<http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html>`_. except
+that I don't care about verb tense or capitalization and if the commit
+message is tied to a bug report, the bug report number should be the
+first thing in the first line. Here's the tbaggery example with some
+adjustments::
+
+    475. short summary (50 chars or less)
+
+    More detailed explanatory text, if necessary.  Wrap it to about 72
+    characters or so.  In some contexts, the first line is treated as
+    the subject of an email and the rest of the text as the body.  The
+    blank line separating the summary from the body is critical
+    (unless you omit the body entirely); tools like rebase can get
+    confused if you run the two together.
+
+    Further paragraphs come after blank lines.
+
+    - Bullet points are okay, too
+
+    - Typically a hyphen or asterisk is used for the bullet, preceded
+      by a single space, with blank lines in between, but conventions
+      vary here
+
+    - Use a hanging indent
+
+Why? Here's the reasons:
+
+* 50 characters or less works well with the various git commands that
+  show only the summary line and also on github.
+* Having the bug number as the first thing makes it easy to see which
+  commits covered which bugs without parsing the commit message. We do
+  that a lot ("When did the fix for bug xyz land?").
+* Wrapping the subsequent paragraphs allows them to show up nicely in
+  git output as well as on github.
+
+Why not the other things? Here's the reasons:
+
+* Capitalization or non-capitalization for a phrase doesn't affect the
+  output of git commands or my ability to quickly parse a summary.
+* Ditto for verb tense.
+* I'm all for ditching convention baggage for things that don't
+  matter.
+
+
+Code documentation conventions
+==============================
+
+Documentation in the code is really helpful. Please add comments where
+you think it's necessary.
+
+We like to use docstrings for classes, methods and functions. They
+should be in reStructuredText format. Something along these lines,
+though most of our docstrings aren't as formal or complete::
+
+    def foo(arg1, arg2):
+        """Foo does something interesting
+
+        :arg arg1: Controls whether or not to bar
+        :arg arg2: Name of the baz to use
+
+        :raises ValueError: If arg2 is not a valid baz.
+
+        :returns: A bat.
+        """
+
+The purpose in-code documentation is three-fold:
+
+1. to clarify complex code so it's easier to discern what it's doing
+2. to make it clear why the code is doing what it's doing
+3. to document any issues the code might have
+
+
+Building the documentation
+==========================
 
 The documentation in `docs/` is built with `Sphinx
 <http://sphinx.pocoo.org/>`_. To build HTML version of the
