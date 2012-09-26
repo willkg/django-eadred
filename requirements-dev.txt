@@ -1,0 +1,7 @@
+# requirements for testing
+django
+nose
+mock
+
+# requirements for building documentation
+Sphinx
