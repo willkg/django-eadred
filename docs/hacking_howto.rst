@@ -7,6 +7,9 @@
 This covers setting up a development environment for developing on
 eadred.
 
+.. contents::
+   :local:
+
 
 Setting up a development environment
 ====================================
