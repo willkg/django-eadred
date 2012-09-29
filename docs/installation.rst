@@ -12,7 +12,7 @@ From PyPI
 
 Do::
 
-    $ pip install django-eadred
+    $ pip install eadred
 
 
 From git

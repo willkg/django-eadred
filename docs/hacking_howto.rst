@@ -182,7 +182,7 @@ Release process
 
 6. Push everything::
 
-       $ git push --tags official master
+       $ git push --tags origin master
 
 7. Update PyPI::
 
