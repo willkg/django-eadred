@@ -25,6 +25,7 @@ setup(
     long_description=open(READMEFILE).read(),
     url='https://github.com/willkg/django-eadred',
     author='Will Kahn-Greene',
+    author_email='willg@bluesock.org',
     license='BSD',
     packages=find_packages(),
     include_package_data=True,
