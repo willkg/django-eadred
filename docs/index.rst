@@ -11,7 +11,6 @@ eadred is a Django-app for generating sample data.
 :License:       BSD 3-clause; see LICENSE file
 :Issues:        https://github.com/willkg/django-eadred/issues
 :Documentation: http://django-eadred.rtfd.org/
-:IRC:           ``#eadred`` on freenode.net
 
 
 Table of Contents

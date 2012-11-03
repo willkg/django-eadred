@@ -61,9 +61,5 @@ Documentation:
 Issue tracker:
     https://github.com/willkg/django-eadred/issues
 
-IRC:
-    #eadred on freenode.net
-
 License:
     BSD 3-clause; see LICENSE file
-
