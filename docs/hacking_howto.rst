@@ -188,4 +188,4 @@ Release process
 
        $ python setup.py sdist upload
 
-8. Update topic in ``#eadred``, blog post, twitter, etc.
+8. Blog post, twitter, etc.
