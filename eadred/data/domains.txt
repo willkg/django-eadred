@@ -1,0 +1,7 @@
+example.net
+example.com
+example.org
+mail1.example.org
+foo.example.com
+eadred.example.net
+ednapiranha.example.org

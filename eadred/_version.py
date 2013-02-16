@@ -3,5 +3,5 @@
 # * 0.3     - released version
 # * 0.3a1   - alpha version
 # * 0.3.dev - version in development
-__version__ = '0.1'
-__releasedate__ = '20120928'
+__version__ = '0.2'
+__releasedate__ = '20130216'

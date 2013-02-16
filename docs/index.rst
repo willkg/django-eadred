@@ -23,6 +23,7 @@ Table of Contents
    changelog
    installation
    sampledata
+   api
    hacking_howto
 
 
