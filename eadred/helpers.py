@@ -57,10 +57,9 @@ def make_unique(gen):
 def name_generator(names=None):
     """Creates a generator for generating names.
 
-    :arg sentences:
+    :arg names:
 
-        list or tuple of sentences you want to use; defaults to
-        ENGLISH_MONARCHS
+        list or tuple of names you want to use; defaults to ENGLISH_MONARCHS
 
     :returns: generator for names
 
