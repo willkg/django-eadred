@@ -12,7 +12,7 @@ class TestHelpers(unittest.TestCase):
         assert gen.next().endswith('0')
         assert gen.next().endswith('1')
         assert gen.next().endswith('2')
-    
+ 
     def test_name_generator(self):
         gen = helpers.name_generator()
         assert gen.next() in helpers.ENGLISH_MONARCHS
