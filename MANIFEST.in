@@ -2,4 +2,6 @@ include README.rst CHANGELOG LICENSE CONTRIBUTORS
 include requirements*.txt
 include docs/Makefile docs/conf.py
 include eadred/data/*.txt
+
 recursive-include docs *.rst *.py
+recursive-include examples *.py
