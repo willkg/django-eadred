@@ -18,10 +18,11 @@ Run::
 
     $ virtualenv ./venv/
     $ . ./venv/bin/activate
-    $ pip install -r requirements-dev.txt
-    $ python setup.py develop
+    $ pip install -r requirements/dev.txt
 
-This sets up all the required dependencies for development of eadred.
+
+This installs all required dependencies for eadred and eadred itself
+for development.
 
 .. Note::
 
@@ -147,6 +148,10 @@ To run the tests, do::
 or run it with the python interpreter of your choice::
 
     $ /path/to/python run_tests.py
+
+Also, you can run the tests in the various environments we support::
+
+    $ tox
 
 
 Writing tests

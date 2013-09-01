@@ -1,6 +1,0 @@
-# requirements for testing
-django
-nose
-
-# requirements for building documentation
-Sphinx

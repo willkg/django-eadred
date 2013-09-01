@@ -1,0 +1,13 @@
+# install eadred for development
+-e .
+
+# requirements for testing
+django
+nose
+tox
+
+# requirements for building documentation
+Sphinx
+
+# requirements for good packaging
+check-manifest
