@@ -2,6 +2,11 @@ import os
 import random
 from itertools import count
 
+try:
+    from django.utils.six import text_type
+except ImportError:
+    text_type = unicode
+
 
 def get_file(fn):
     """Returns file contents in unicode as list."""
@@ -51,7 +56,7 @@ def make_unique(gen):
 
     """
     while True:
-        yield next(gen) + unicode(next(_unique_counter))
+        yield next(gen) + text_type(next(_unique_counter))
 
 
 def name_generator(names=None):
@@ -94,7 +99,7 @@ def name_generator(names=None):
         names = ENGLISH_MONARCHS
 
     while True:
-        yield unicode(random.choice(names))
+        yield text_type(random.choice(names))
 
 
 def email_generator(names=None, domains=None, unique=False):
