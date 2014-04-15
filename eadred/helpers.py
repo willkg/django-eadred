@@ -1,6 +1,12 @@
+from __future__ import unicode_literals
 import os
 import random
 from itertools import count
+
+try:
+    from django.utils.six import text_type
+except ImportError:
+    text_type = unicode
 
 
 def get_file(fn):
@@ -51,7 +57,7 @@ def make_unique(gen):
 
     """
     while True:
-        yield gen.next() + unicode(_unique_counter.next())
+        yield next(gen) + text_type(next(_unique_counter))
 
 
 def name_generator(names=None):
@@ -94,7 +100,7 @@ def name_generator(names=None):
         names = ENGLISH_MONARCHS
 
     while True:
-        yield unicode(random.choice(names))
+        yield text_type(random.choice(names))
 
 
 def email_generator(names=None, domains=None, unique=False):
@@ -132,13 +138,13 @@ def email_generator(names=None, domains=None, unique=False):
 
     """
     if names is None:
-        names = [name.encode('ascii', 'ignore').lower().replace(' ', '')
+        names = [name.encode('ascii', 'ignore').lower().replace(b' ', b'')
                  for name in ENGLISH_MONARCHS]
     if domains is None:
         domains = DOMAINS
 
     if unique:
-        uniquifyer = lambda: str(_unique_counter.next())
+        uniquifyer = lambda: str(next(_unique_counter))
     else:
         uniquifyer = lambda: ''
 
