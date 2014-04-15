@@ -137,7 +137,7 @@ def email_generator(names=None, domains=None, unique=False):
 
     """
     if names is None:
-        names = [name.encode('ascii', 'ignore').lower().replace(' ', '')
+        names = [name.encode('ascii', 'ignore').lower().replace(b' ', b'')
                  for name in ENGLISH_MONARCHS]
     if domains is None:
         domains = DOMAINS
