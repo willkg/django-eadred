@@ -51,7 +51,7 @@ def make_unique(gen):
 
     """
     while True:
-        yield gen.next() + unicode(_unique_counter.next())
+        yield next(gen) + unicode(next(_unique_counter))
 
 
 def name_generator(names=None):
@@ -138,7 +138,7 @@ def email_generator(names=None, domains=None, unique=False):
         domains = DOMAINS
 
     if unique:
-        uniquifyer = lambda: str(_unique_counter.next())
+        uniquifyer = lambda: str(next(_unique_counter))
     else:
         uniquifyer = lambda: ''
 
