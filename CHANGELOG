@@ -11,7 +11,9 @@ Version 0.3: In development
 
 **Changes**
 
-* Python 3 support.
+* Fixed documentation.
+* Fixed test infrastructure and added tox support.
+* Support for Python 3.3 and later.
 
 
 Version 0.2: February 16th, 2013
